@@ -1,6 +1,13 @@
 .footer {
     bottom: 0;
-    width: 100%;    
+    padding: 10px;
+    background-color: #00000080;
+}
+
+.footer p {
+    margin: 0;
+    color: #ffffff !important;
+    text-align: center;
 }
 
 .carousel {
@@ -47,9 +54,17 @@
     text-decoration: line-through;
     color: #888;
     margin-right: 10px;
-  }
+}
 
-  .discount-price {
+.discount-price {
     font-weight: bold;
     color: red;
-  }
+}
+
+.product-header {
+    /* border: solid 5px; */
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #8885;
+    color: black;
+}
