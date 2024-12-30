@@ -1,4 +1,6 @@
+import axios from "axios";
 import "./index.css"
+import { useEffect, useState } from "react";
 const saleProducts = [
     {
         id: 1,
@@ -30,57 +32,6 @@ const saleProducts = [
     },
 ];
 
-const products = [
-    {
-        id: 1,
-        name: "Item 5",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 50000,
-    },
-    {
-        id: 2,
-        name: "Item 6",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 100000,
-    },
-    {
-        id: 3,
-        name: "Item 7",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 50000,
-    },
-    {
-        id: 4,
-        name: "Item 8",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 200000,
-    },
-    {
-        id: 5,
-        name: "Item 9",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 70000,
-    },
-    {
-        id: 6,
-        name: "Item 10",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 20000,
-    },
-    {
-        id: 7,
-        name: "Item 11",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 80000,
-    },
-    {
-        id: 8,
-        name: "Item 12",
-        image: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22b1b91f-cef2-4861-a8d3-5ee250044361/dfts0ff-567efa30-60a4-4529-baa8-76e9afc14c69.png/v1/fill/w_1920,h_1080,q_80,strp/boboiboy_supra_orignal_sori_poster_new_edition_by_supraeditorart_dfts0ff-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzIyYjFiOTFmLWNlZjItNDg2MS1hOGQzLTVlZTI1MDA0NDM2MVwvZGZ0czBmZi01NjdlZmEzMC02MGE0LTQ1MjktYmFhOC03NmU5YWZjMTRjNjkucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.chpaU1Nxd2rC5f2aZ7F3w0AUIW8O8XYxKdiizc1HvJU",
-        price: 200000,
-    },
-];
-
 const carousels = [
     {
         id: 1,
@@ -100,6 +51,20 @@ const carousels = [
 ]
 
 let Landing = () => {
+    const [products, setProducts] = useState([]); 
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const response = await axios.get("http://localhost:8080/api/product");
+            setProducts(response.data.data);
+          } catch (error) {
+            console.error("Error fetching data from API : ", error);
+          }
+        };
+    
+        fetchProducts();
+      }, []);
     return (
         <>
         <div>
@@ -154,7 +119,9 @@ let Landing = () => {
             <div class="container text-center mb-4">
                 <div class="row"> 
                     <div class="col">
-                        <h3>Sale Products</h3>
+                        <div class="product-header">
+                            <h3>Sale Products</h3>
+                        </div>
                         <div className="sale-product-2">
                             {saleProducts.map(product => {
                                 const discountPercentage = Math.round(
@@ -178,15 +145,18 @@ let Landing = () => {
                     </div>
                 </div>
             </div>
+
             {/* PRODUCT */}
-            <div class="container text-center mb-4">
+            <div class="container text-center mb-4 product-box overflow-auto">
                 <div class="row"> 
                     <div class="col">
-                        <h3>Products</h3>
+                        <div class="product-header">
+                            <h3 >Products</h3>
+                        </div>
                         <div className="sale-product-2">
                             {products.map(product => (
                                     <div class="card" style={{width: "18rem"}}>
-                                    <img src={product.image} class="card-img-top" alt="..." />
+                                    <img src={product.asset.path} class="card-img-top" alt="..." />
                                     <div class="card-body">
                                         <h5 class="card-title">{product.name}</h5>
                                         <p class="card-text">Rp.{product.price}</p>
@@ -201,6 +171,7 @@ let Landing = () => {
             </div>
         </div>
 
+        {/* FOOTER */}
         <div>
             <div className="footer">
                 <p class="text-center text-muted">© 2024 Transaction, Inc</p>
